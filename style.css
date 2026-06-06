@@ -1,0 +1,83 @@
+﻿:root {
+    --bg-main: #090d16;
+    --bg-panel: #111827;
+    --bg-card: #1f2937;
+    --text-light: #f3f4f6;
+    --text-muted: #9ca3af;
+    --accent: #06b6d4;
+    --success: #10b981;
+    --danger: #ef4444;
+    --warning: #f59e0b;
+    --monitor-bg: #050505;
+    --monitor-matrix: #061f0c;
+    --monitor-text: #4ade80;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
+body { background-color: var(--bg-main); color: var(--text-light); min-height: 100vh; display: flex; flex-direction: column; }
+
+header { background-color: var(--bg-panel); padding: 15px 25px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--accent); }
+.header-right { display: flex; align-items: center; gap: 20px; }
+.category-selector select { background-color: var(--bg-card); color: #fff; border: 1px solid var(--accent); padding: 8px 12px; border-radius: 6px; font-weight: bold; }
+.score-board { background: #000; padding: 8px 16px; border-radius: 6px; border: 1px solid var(--warning); font-size: 1.1rem; font-weight: bold; color: var(--warning); }
+
+.workbench { display: grid; grid-template-columns: 1.3fr 1.1fr 0.9fr; gap: 15px; padding: 15px; flex-grow: 1; }
+@media (max-width: 1100px) { .workbench { grid-template-columns: 1fr; } }
+
+section { background-color: var(--bg-panel); border-radius: 8px; border: 1px solid #374151; padding: 15px; display: flex; flex-direction: column; gap: 12px; }
+.panel-header { font-size: 1.05rem; font-weight: bold; padding-bottom: 6px; border-bottom: 1px solid #374151; color: var(--accent); text-transform: uppercase; }
+
+.device-environment { background: #0b0f19; border: 1px solid #2d3748; border-radius: 6px; padding: 15px; display: flex; flex-direction: column; align-items: center; gap: 15px; min-height: 320px; width: 100%; }
+.hardware-screen { width: 100%; height: 180px; background-color: var(--monitor-bg); border: 8px solid #374151; border-radius: 6px; display: flex; justify-content: center; align-items: center; padding: 10px; overflow: hidden; transition: all 0.3s ease; }
+.hardware-screen.on { background-color: var(--monitor-matrix); border-color: #4b5563; }
+.hardware-screen.blue-screen { background-color: #0022aa; }
+.hardware-screen.white-screen { background-color: #ffffff; }
+
+#screen-output { font-family: monospace; font-size: 0.85rem; color: var(--text-muted); text-align: center; white-space: pre-line; width: 100%; }
+.hardware-screen.on #screen-output { color: var(--monitor-text); text-shadow: 0 0 3px var(--monitor-text); }
+.hardware-screen.white-screen #screen-output { color: #111827; }
+
+/* ANIMACIÓN GRÁFICA DE INSTALACIÓN (BARRA DE CARGA REAL) */
+.progress-bar-container { width: 80%; background-color: #222; border: 1px solid #fff; height: 20px; margin: 10px auto; border-radius: 4px; overflow: hidden; position: relative; }
+.progress-bar-fill { height: 100%; background-color: var(--success); width: 0%; transition: width 0.1s linear; }
+
+.hardware-chassis { width: 100%; max-width: 260px; background: #1f2937; border: 2px solid #4b5563; border-radius: 6px; padding: 12px; position: relative; }
+.led-group { display: flex; gap: 8px; position: absolute; top: 8px; right: 12px; }
+.led { width: 10px; height: 10px; border-radius: 50%; background-color: #4b5563; }
+#led-power.active { background-color: #10b981; box-shadow: 0 0 8px #10b981; }
+#led-status.active { background-color: #f59e0b; box-shadow: 0 0 6px #f59e0b; }
+
+.internal-view { background: #0b0f19; border: 1px solid #374151; border-radius: 4px; min-height: 70px; margin-top: 15px; padding: 8px; font-size: 0.8rem; color: var(--text-muted); display: flex; align-items: center; justify-content: center; text-align: center; }
+.audio-alert-box { background: #111827; border: 1px solid #374151; padding: 10px; border-radius: 6px; display: flex; align-items: center; justify-content: space-between; font-size: 0.85rem; }
+#audio-description { color: var(--warning); }
+.symptom-box { background-color: #1e1b4b; border-left: 4px solid var(--accent); padding: 10px; border-radius: 0 6px 6px 0; font-size: 0.9rem; }
+
+.action-group { background: #111827; border: 1px solid #374151; padding: 10px; border-radius: 6px; }
+.action-group h3 { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 8px; text-transform: uppercase; }
+.grid-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+
+.btn { padding: 8px 12px; border: none; border-radius: 4px; font-weight: bold; cursor: pointer; font-size: 0.85rem; }
+.btn-sm { padding: 4px 8px; font-size: 0.75rem; background: #374151; color: #fff; }
+.btn-power { background-color: #4b5563; color: #fff; }
+.btn-inspect { background-color: #1f2937; color: #fff; border: 1px solid var(--accent); }
+.btn-action { background-color: var(--accent); color: #000; width: 100%; margin-top: 5px; }
+.btn-success { background-color: var(--success); color: #000; width: 100%; margin-top: 5px; }
+.btn-primary { background-color: #4f46e5; color: #fff; width: 100%; }
+.btn:disabled { opacity: 0.3; cursor: not-allowed; }
+
+.options-container { display: flex; flex-direction: column; gap: 6px; max-height: 120px; overflow-y: auto; }
+.radio-label { display: flex; align-items: center; gap: 8px; background: var(--bg-card); padding: 6px 10px; border-radius: 4px; font-size: 0.8rem; cursor: pointer; border: 1px solid #374151; }
+
+.tutor-avatar { display: flex; align-items: center; gap: 10px; background: #1f2937; padding: 8px; border-radius: 6px; }
+.avatar-icon { font-size: 1.8rem; }
+.instruction-box { background: #061b2c; border-left: 4px solid var(--accent); padding: 10px; border-radius: 6px; font-size: 0.85rem; }
+.feedback-box { background: #000; border: 1px solid #2d3748; padding: 10px; border-radius: 6px; min-height: 65px; font-size: 0.85rem; }
+.feedback-success { border-left: 4px solid var(--success); color: #a7f3d0; }
+.feedback-error { border-left: 4px solid var(--danger); color: #fca5a5; }
+
+.status-table { width: 100%; font-size: 0.8rem; collapse: collapse; }
+.status-table td { padding: 4px 0; }
+.badge { padding: 2px 6px; border-radius: 4px; background: #4b5563; font-weight: bold; font-size: 0.7rem; }
+.badge-off { background: var(--danger); }
+.badge-on { background: var(--success); }
+.badge-pending { background: var(--warning); color: #000; }

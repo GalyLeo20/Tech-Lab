@@ -1,0 +1,136 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laboratorio Técnico Avanzado Multi-Dispositivos</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="./manifest.json">
+    <meta name="theme-color" content="#000000">
+</head>
+<body>
+    <header>
+        <div class="brand">
+            <h1>TECH-LAB 2026</h1>
+            <p>Simulador de Soporte Técnico y Despliegue de Sistemas</p>
+        </div>
+        <div class="header-right">
+            <div class="category-selector">
+                <label for="area-select">🔬 Selecciona un Área de Práctica:</label>
+                <select id="area-select">
+                    <option value="pc">Computadoras de Escritorio (PC)</option>
+                    <option value="laptop">Laptops y Portátiles Modernos</option>
+                    <option value="printer">Impresoras (Láser / Inyección / Térmicas)</option>
+                    <option value="software">Instalación de Software y Ofimática</option>
+                </select>
+            </div>
+            <div class="score-board">Puntuación: <span id="score-value">100</span> pts</div>
+        </div>
+    </header>
+
+    <main class="workbench">
+        <section class="visual-panel">
+            <div class="panel-header" id="workspace-title">Mesa de Trabajo</div>
+            
+            <div class="device-environment">
+                <div class="hardware-screen" id="hardware-screen">
+                    <div id="screen-output">SISTEMA APAGADO</div>
+                </div>
+
+                <div class="hardware-chassis" id="hardware-chassis">
+                    <div class="led-group">
+                        <div class="led" id="led-power" title="LED de Encendido"></div>
+                        <div class="led" id="led-status" title="LED de Estado/Actividad"></div>
+                    </div>
+                    <div class="internal-view" id="internal-view">
+                        Gabinete Cerrado
+                    </div>
+                </div>
+            </div>
+
+            <div class="audio-alert-box" id="audio-alert-box">
+                <span>🔊 Altavoz de Diagnóstico:</span>
+                <strong id="audio-description">Silencio</strong>
+                <button id="btn-play-sound" class="btn btn-sm" disabled>Escuchar Pitido</button>
+            </div>
+
+            <div class="symptom-box">
+                <strong>📋 Orden de Servicio (Reporte del Cliente):</strong>
+                <p id="symptom-text">Cargando caso...</p>
+            </div>
+        </section>
+
+        <section class="control-panel">
+            <div class="panel-header">Consola de Operaciones Técnicas</div>
+            
+            <div class="action-group">
+                <h3>1. Interacción Física inicial</h3>
+                <div class="grid-buttons">
+                    <button id="btn-power" class="btn btn-power">Presionar Botón Encendido</button>
+                    <button id="btn-inspect" class="btn btn-inspect">Abrir / Inspeccionar Hardware</button>
+                </div>
+            </div>
+
+            <div class="action-group">
+                <h3>2. Hipótesis y Diagnóstico Técnico</h3>
+                <div id="diagnostic-options" class="options-container"></div>
+                <button id="btn-diagnose" class="btn btn-action" disabled>Emitir Diagnóstico Oficial</button>
+            </div>
+
+            <div class="action-group">
+                <h3>3. Plan de Acción / Reemplazo de Partes</h3>
+                <div id="solution-options" class="options-container"></div>
+                <button id="btn-repair" class="btn btn-success" disabled>Ejecutar Reparación / Instalación</button>
+            </div>
+
+            <button id="btn-next" class="btn btn-primary">Cargar Siguiente Caso del Área</button>
+        </section>
+
+        <section class="tutor-panel">
+            <div class="panel-header">Supervisor de Taller</div>
+            <div class="tutor-avatar">
+                <div class="avatar-icon">🛠️</div>
+                <div>
+                    <h4>Instructor de Laboratorio</h4>
+                    <small>Soporte de Niveles I, II y III</small>
+                </div>
+            </div>
+            
+            <div class="instruction-box">
+                <h5>Guía de Procedimiento Seguro:</h5>
+                <p id="tutor-step" class="step-highlight">Paso 1: Interactúa con el dispositivo encendiéndolo o destapándolo.</p>
+            </div>
+
+            <div class="feedback-box" id="feedback-box">
+                <h5>Bitácora de Eventos:</h5>
+                <p id="tutor-feedback">Esperando inicio...</p>
+            </div>
+
+            <div class="history-box">
+                <h5>Estados del Reporte Técnico:</h5>
+                <table class="status-table">
+                    <tr><td>Alimentación Eléctrica:</td><td><span id="badge-power" class="badge badge-off">OFF</span></td></tr>
+                    <tr><td>Integridad de Chasis:</td><td><span id="badge-hardware" class="badge">CERRADO</span></td></tr>
+                    <tr><td>Estatus de Diagnóstico:</td><td><span id="badge-diag" class="badge badge-pending">PENDIENTE</span></td></tr>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('./sw.js')
+        .then(registration => {
+          console.log('Service Worker registrado con éxito:', registration.scope);
+        })
+        .catch(error => {
+          console.log('Fallo al registrar el Service Worker:', error);
+        });
+    });
+  }
+</script>
+</body>
+</html>
